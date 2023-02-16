@@ -3,7 +3,7 @@ from .models import Sensor
 
 
 class SensorAdmin(admin.ModelAdmin):
-    pass
+    list_display = ('location', 'state')
 
 
 admin.site.register(Sensor, SensorAdmin)

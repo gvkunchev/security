@@ -16,3 +16,5 @@ class Sensor(models.Model):
                              choices=Status.choices,
                              default=Status.OPEN)
 
+    def __str__(self):
+        return self.location
