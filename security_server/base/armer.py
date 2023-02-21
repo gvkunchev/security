@@ -1,5 +1,9 @@
+import logging
 from .models import Sensor, ArmStatus
 from threading import Timer
+
+
+logger = logging.getLogger('default_logger')
 
 
 class Armer:
@@ -16,14 +20,23 @@ class Armer:
     
     def _check_verification(self):
         """Ensure that the home is verified after opening the door."""
-        if self._arm_status == ArmStatus.Status.DISARMING:
-            self._arm_status = ArmStatus.Status.COMPROMISED
+        self._arm_status.refresh_from_db()
+        if self._arm_status.state == ArmStatus.Status.DISARMING:
+            logger.error('Setting compromised status.')
+            self._arm_status.state = ArmStatus.Status.COMPROMISED
+            self._arm_status.save()
 
     def _monitor_status(self):
         """Monitor sensor and arm status."""
-        if self._arm_status == ArmStatus.Status.ARMED:
+        self._arm_status.refresh_from_db()
+        if self._arm_status.state == ArmStatus.Status.ARMED:
             for sensor in self._sensors:
+                sensor.refresh_from_db()
                 if sensor.state == Sensor.Status.OPEN:
-                    sensor.state = Sensor.Status.DISARMING
+                    logger.warning(f'Open door detected: {sensor.location}')
+                    self._arm_status.state = ArmStatus.Status.DISARMING
+                    self._arm_status.save()
+                    logger.info('Setting disarming status.')
                     Timer(self.TIMEOUT, self._check_verification).start()
+                    break
         Timer(self.TIME_DELTA, self._monitor_status).start()

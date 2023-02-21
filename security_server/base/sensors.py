@@ -24,7 +24,7 @@ class Sensors:
     def _init_sensors(self):
         """initialize sensors."""
         for sensor in self._sensors:
-            self._history.append([0] * self.HISTORY_LENGTH)
+            self._history.append([1] * self.HISTORY_LENGTH)
             GPIO.setup(sensor.pin_out, GPIO.OUT)
             GPIO.output(sensor.pin_out, GPIO.HIGH)
             GPIO.setup(sensor.pin_in, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
