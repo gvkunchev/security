@@ -15,12 +15,12 @@ class Sensors:
         self._init_board()
         self._init_sensors()
         self._monitor_status()
-    
+
     def _init_board(self):
         """Initialize the Pi board."""
         GPIO.setwarnings(False)
         GPIO.setmode(GPIO.BOARD)
-    
+
     def _init_sensors(self):
         """initialize sensors."""
         for sensor in self._sensors:
@@ -28,7 +28,7 @@ class Sensors:
             GPIO.setup(sensor.pin_out, GPIO.OUT)
             GPIO.output(sensor.pin_out, GPIO.HIGH)
             GPIO.setup(sensor.pin_in, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-    
+
     def _monitor_status(self):
         """Monitor sensor status."""
         for sensor, history in zip(self._sensors, self._history):

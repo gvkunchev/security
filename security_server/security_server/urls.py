@@ -16,6 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from base.sensors import Sensors
+from base.armer import Armer
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -23,3 +24,4 @@ urlpatterns = [
 ]
 
 Sensors()
+Armer()
