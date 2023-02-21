@@ -1,0 +1,2 @@
+. /var/www/security/django_venv/bin/activate
+python /var/www/security/security_server/manage.py runserver 0.0.0.0:8000
