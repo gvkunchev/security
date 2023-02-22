@@ -17,4 +17,4 @@ class Alert:
 
     def send_alert(self):
         """Send alert email."""
-        self._yag.send(self.TO, self.SUBJECT, self.BODY)
+        self._yag.send(self.RECIPIENT, self.SUBJECT, self.BODY)
