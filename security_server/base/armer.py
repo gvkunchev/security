@@ -1,6 +1,8 @@
 import logging
-from .models import Sensor, ArmStatus
 from threading import Timer
+
+from .models import Sensor, ArmStatus
+from .alert import Alert
 
 
 logger = logging.getLogger('default_logger')
@@ -16,6 +18,7 @@ class Armer:
         """Initialize."""
         self._sensors = Sensor.objects.all()
         self._arm_status = ArmStatus.objects.all().first()
+        self._alert = Alert()
         self._monitor_status()
     
     def _check_verification(self):
@@ -25,6 +28,7 @@ class Armer:
             logger.error('Setting compromised status.')
             self._arm_status.state = ArmStatus.Status.COMPROMISED
             self._arm_status.save()
+            self._alert.send_alert()
 
     def _monitor_status(self):
         """Monitor sensor and arm status."""
