@@ -4,7 +4,7 @@
   - a virutalenv with
     - requirements.txt installed
     - env variables for Django secret key (DJANGO_SECRET_KEY), password pattern (UNLOCK_PATTERN), gmail password for the user (GMAIL_PASS)
-        * use app password, not your real password - https://myaccount.google.com/security
+        * use app password, not your real password - https://myaccount.google.com/apppasswords
 
 * Running  
   vim /etc/rc.local:
