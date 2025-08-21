@@ -1,4 +1,9 @@
+import sys
+
 from django.apps import AppConfig
+
+from base.sensors import Sensors
+from base.armer import Armer
 
 
 class BaseConfig(AppConfig):
@@ -7,8 +12,7 @@ class BaseConfig(AppConfig):
 
     def ready(self):
         """Create the singletons that monitor the status."""
-        # This code is not executed during migrations
-        from base.sensors import Sensors
-        from base.armer import Armer
-        Sensors()
-        Armer()
+        if not 'manage.py' in sys.argv:
+            # This code is not executed during migrations
+            Sensors()
+            Armer()
