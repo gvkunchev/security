@@ -1,5 +1,5 @@
 import logging
-from datetime import timedela
+from datetime import timedelta
 from django.utils import timezone
 from threading import Timer
 
