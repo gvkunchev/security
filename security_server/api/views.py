@@ -1,6 +1,6 @@
 import logging
 import os
-from datetime import datetime
+from django.utils import timezone
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from base.serializers import StatusSerializer, ArmStatusSerializer
@@ -28,7 +28,7 @@ def arm(request):
     arm_status = ArmStatus.objects.all().first()
     if arm_status.state == ArmStatus.Status.UNARMED:
         arm_status.state = ArmStatus.Status.ARMED
-        arm_status.last_armed_time = datetime.now()
+        arm_status.last_armed_time = timezone.now()
         logger.info('Setting arm status.')
     arm_status.save()
     serializer = ArmStatusSerializer(arm_status)

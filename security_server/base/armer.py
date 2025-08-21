@@ -1,5 +1,6 @@
 import logging
 from datetime import datetime
+from django.utils import timezone
 from threading import Timer
 
 from .models import Sensor, ArmStatus
@@ -36,7 +37,9 @@ class Armer:
         """Monitor sensor and arm status."""
         self._arm_status.refresh_from_db()
         if self._arm_status.state == ArmStatus.Status.ARMED:
-            time_since_arming = datetime.now() - self._arm_status.last_armed_time
+            time_since_arming = timezone.now() - self._arm_status.last_armed_time
+            print("Armed for: ",time_since_arming)
+            print(self.TOLERANCE)
             if time_since_arming > datetime.timedelta(seconds=self.TOLERANCE):
                 for sensor in self._sensors:
                     sensor.refresh_from_db()
