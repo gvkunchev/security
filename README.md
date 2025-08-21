@@ -16,9 +16,9 @@
   > Sensor.objects.create(location=, pin_in=, pin_out=, state=Sensor.Status.CLOSED)
   """
   My pins:
-    Sensor.objects.create(location="Bed Room", pin_in=37, pin_out=36, state=Sensor.Status.CLOSED)
-    Sensor.objects.create(location="Kid Room", pin_in=40, pin_out=38, state=Sensor.Status.CLOSED)
-    Sensor.objects.create(location="Front Door", pin_in=35, pin_out=33, state=Sensor.Status.CLOSED)
+    Sensor.objects.create(location="Bed room", pin_in=37, pin_out=36, state=Sensor.Status.CLOSED)
+    Sensor.objects.create(location="Kid room", pin_in=40, pin_out=38, state=Sensor.Status.CLOSED)
+    Sensor.objects.create(location="Front door", pin_in=35, pin_out=33, state=Sensor.Status.CLOSED)
   """
   ```
 
