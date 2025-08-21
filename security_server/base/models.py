@@ -8,7 +8,7 @@ class Sensor(models.Model):
         """Door sensor state representation."""
         OPEN = 'Open'
         CLOSED = 'Closed'
-        
+
     location = models.CharField(max_length=100)
     pin_out = models.IntegerField()
     pin_in = models.IntegerField()
@@ -34,6 +34,7 @@ class ArmStatus(models.Model):
     state = models.CharField(max_length=20,
                              choices=Status.choices,
                              default=Status.UNARMED)
+    last_armed_time = models.DateTimeField(auto_now_add=True, blank=True)
 
     def __str__(self):
         return self.location
