@@ -5,6 +5,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from base.serializers import StatusSerializer, ArmStatusSerializer
 from base.models import Sensor, ArmStatus
+from base.calendar import calendar
 
 
 logger = logging.getLogger('default_logger')
@@ -21,6 +22,11 @@ def get_arm_status(request):
     """Return arm status."""
     serializer = ArmStatusSerializer(ArmStatus.objects.all().first())
     return Response(serializer.data)
+
+@api_view(['GET',])
+def get_calendar(request):
+    """Return list of calendar events."""
+    return Response(calendar.get_events())
 
 @api_view(['GET',])
 def arm(request):

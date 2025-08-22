@@ -5,6 +5,8 @@
     - requirements.txt installed
     - env variables for Django secret key (DJANGO_SECRET_KEY), password pattern (UNLOCK_PATTERN), gmail password for the user (GMAIL_PASS)
         * use app password, not your real password - https://myaccount.google.com/apppasswords
+    - Google auth json file for a service account, having access to the calendar stored in the base app directory. Adjust the file name in base/calendar.py
+    - Adjust the calendar id in the same file.
 
 * Database preparation
   The first start requires a prepared database objects:
