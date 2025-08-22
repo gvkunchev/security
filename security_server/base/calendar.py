@@ -30,7 +30,7 @@ class Calendar:
         """Initializator."""
         self._creds = service_account.Credentials.from_service_account_file(self.SERVICE_ACCOUNT_FILE,
                                                                             scopes=self.SCOPES)
-        self._service = build('calendar', 'v3', credentials=creds)
+        self._service = build('calendar', 'v3', credentials=self._creds)
 
     def get_events(self):
         """Return json of the events."""
